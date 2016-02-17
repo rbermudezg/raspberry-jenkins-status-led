@@ -1,6 +1,8 @@
 var request = require('request');
 var cheerio = require('cheerio');
 var wpi = require('wiring-pi');
+var Sound = require('node-aplay');
+
 wpi.setup('gpio');
 wpi.pinMode(17, wpi.OUTPUT); // led R
 wpi.pinMode(27, wpi.OUTPUT); // led G
@@ -14,8 +16,19 @@ var rgbColors = {
   black: [0, 0, 0]
 }
 
+var sounds = {
+  red: 'sounds/R2D2.wav',
+  grey: 'sounds/R2D2.wav',
+  blue: 'sounds/R2D2.wav',
+  black: 'sounds/R2D2.wav'
+};
+
 var ledInterval;
 
+
+var setSound = function (color) {
+  new Sound(sounds[color]).play();
+}
 
 var setLedStatus = function (color, blinking) {
   clearInterval(ledInterval);
@@ -51,7 +64,7 @@ var refreshTimeWhenRunning = 5000;
 var scrapJenking = function () {
   var url = 'http://jenkins.pub.dtvc.local/view/www_ccma_cat/job/www_ccma_cat-webapp-functionalTest-moduls-validate-parametrized/';
   request(url, function (error, response, html) {
-    var ledColor = 'blue';
+    var colorStatus = 'blue';
     var isRunning = false;
     if (!error) {
       var $ = cheerio.load(html);
@@ -61,16 +74,17 @@ var scrapJenking = function () {
       isRunning = (imgSrc.indexOf('anime.gif') !== -1);
 
       if (imgSrc.indexOf('/red') !== -1) {
-        ledColor = 'red';
+        colorStatus = 'red';
       } else if (imgSrc.indexOf('/grey') !== -1) {
-        ledColor = 'grey';
+        colorStatus = 'grey';
       } else if (imgSrc.indexOf('/blue') !== -1) {
-        ledColor = 'blue';
+        colorStatus = 'blue';
       }
     }
 
     //LED!!!!
-    setLedStatus(ledColor, isRunning);
+    setLedStatus(colorStatus, isRunning);
+    setSound(colorStatus);
     setTimeout(function () {
       scrapJenking();
     }, (isRunning) ? refreshTimeWhenRunning : refreshTime);
