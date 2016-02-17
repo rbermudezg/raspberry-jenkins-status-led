@@ -19,7 +19,7 @@ var ledInterval;
 
 var setLedStatus = function (color, blinking) {
   clearInterval(ledInterval);
-  
+
   var currentColor = color;
   setLedColor(currentColor);
 
@@ -44,6 +44,9 @@ var setLedColor = function (color) {
   wpi.digitalWrite(22, rgbColor[2]);
 };
 
+
+var refreshTime = 15000;
+var refreshTimeWhenRunning = 5000;
 
 var scrapJenking = function () {
   var url = 'http://jenkins.pub.dtvc.local/view/www_ccma_cat/job/www_ccma_cat-webapp-functionalTest-moduls-validate-parametrized/';
@@ -70,7 +73,7 @@ var scrapJenking = function () {
     setLedStatus(ledColor, isRunning);
     setTimeout(function () {
       scrapJenking();
-    }, 15000);
+    }, (isRunning) ? refreshTimeWhenRunning : refreshTime);
 
   })
 };
