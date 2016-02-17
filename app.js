@@ -32,15 +32,19 @@ var hasChanged = function (color, blinking) {
 var sounds = {
   red: 'sounds/red.wav',
   grey: 'sounds/grey.wav',
-  blue: 'sounds/blue.wav'
+  blue: 'sounds/blue.wav',
+  blinking: 'sounds/blinking.wav'
 };
 
 var ledInterval;
 
 
-var setSound = function (color) {
-  console.log('sound: ' + sounds[color]);
-  new Sound(sounds[color]).play();
+var setSound = function (color, isRunning) {
+  if (isRunning) {
+    new Sound(sounds['blinking']).play();
+  } else {
+    new Sound(sounds[color]).play();
+  }
 }
 
 var setLedStatus = function (color, blinking) {
@@ -98,7 +102,7 @@ var scrapJenking = function () {
 
     if (hasChanged(colorStatus, isRunning)) {
       setLedStatus(colorStatus, isRunning);
-      setSound(colorStatus);
+      setSound(colorStatus, isRunning);
     }
     //LED!!!!
 
