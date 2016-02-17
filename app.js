@@ -41,10 +41,10 @@ var ledInterval;
 
 var setSound = function (color, isRunning) {
   if (isRunning) {
-    new Sound(sounds['blinking']).play();
-  } else {
-    new Sound(sounds[color]).play();
+    color = 'blinking';
   }
+  console.log('setSound: ' + sounds[color]);
+  new Sound(sounds[color]).play();
 }
 
 var setLedStatus = function (color, blinking) {
