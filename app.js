@@ -17,10 +17,9 @@ var rgbColors = {
 }
 
 var sounds = {
-  red: 'sounds/R2D2.wav',
-  grey: 'sounds/R2D2.wav',
-  blue: 'sounds/R2D2.wav',
-  black: 'sounds/R2D2.wav'
+  red: 'sounds/red.wav',
+  grey: 'sounds/grey.wav',
+  blue: 'sounds/blue.wav'
 };
 
 var ledInterval;
