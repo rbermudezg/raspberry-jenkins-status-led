@@ -70,7 +70,7 @@ var scrapJenking = function () {
     setLedStatus(ledColor, isRunning);
     setTimeout(function () {
       scrapJenking();
-    }, 30000);
+    }, 15000);
 
   })
 };
