@@ -1,7 +1,7 @@
 var request = require('request');
 var cheerio = require('cheerio');
 var wpi = require('wiring-pi');
-var wpi.setup('gpio');
+wpi.setup('gpio');
 wpi.pinMode(17, wpi.OUTPUT); // led R
 wpi.pinMode(27, wpi.OUTPUT); // led G
 wpi.pinMode(22, wpi.OUTPUT); // led B
