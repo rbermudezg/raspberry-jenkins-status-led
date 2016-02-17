@@ -115,3 +115,8 @@ var scrapJenking = function () {
 
 
 scrapJenking();
+
+process.on('exit', (code) => {
+  setLedStatus('grey', false);
+  setSound('black', false);
+});
