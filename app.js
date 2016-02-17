@@ -16,6 +16,19 @@ var rgbColors = {
   black: [0, 0, 0]
 }
 
+
+var lastColor, lastBliking;
+
+var hasChanged = function (color, blinking) {
+  var changed = false;
+  if (lastColor !== color || lastBliking !== blinking) {
+    changed = true;
+  }
+  lastColor = color;
+  lastBliking = blinking;
+  return changed;
+}
+
 var sounds = {
   red: 'sounds/red.wav',
   grey: 'sounds/grey.wav',
@@ -83,9 +96,12 @@ var scrapJenking = function () {
       }
     }
 
+    if (hasChanged(colorStatus, isRunning)) {
+      setLedStatus(colorStatus, isRunning);
+      setSound(colorStatus);
+    }
     //LED!!!!
-    setLedStatus(colorStatus, isRunning);
-    setSound(colorStatus);
+
     setTimeout(function () {
       scrapJenking();
     }, (isRunning) ? refreshTimeWhenRunning : refreshTime);
