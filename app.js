@@ -27,10 +27,12 @@ var ledInterval;
 
 
 var setSound = function (color) {
+  console.log('sound: ' + sounds[color]);
   new Sound(sounds[color]).play();
 }
 
 var setLedStatus = function (color, blinking) {
+  console.log('led: ' + color);
   clearInterval(ledInterval);
 
   var currentColor = color;
