@@ -46,7 +46,7 @@ var setLedColor = function (color) {
 
 
 var scrapJenking = function () {
-  var url = 'http://jenkins.pub.dtvc.local/view/www_ccma_cat/job/www_ccma_cat-webapp-functionalTest-moduls-validate/';
+  var url = 'http://jenkins.pub.dtvc.local/view/www_ccma_cat/job/www_ccma_cat-webapp-functionalTest-moduls-validate-parametrized/';
   request(url, function (error, response, html) {
     var ledColor = 'blue';
     var isRunning = false;
